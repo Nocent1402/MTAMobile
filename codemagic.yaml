@@ -1,0 +1,31 @@
+workflows:
+  ios-simulator:
+    name: MTA Mobile iOS Build
+    max_build_duration: 30
+    instance_type: mac_mini_m2
+
+    environment:
+      xcode: latest
+
+    scripts:
+      - name: Install XcodeGen
+        script: brew install xcodegen
+
+      - name: Generate Xcode project
+        script: xcodegen generate
+
+      - name: Build iOS Simulator App
+        script: |
+          xcodebuild \
+            -project MTAMobile.xcodeproj \
+            -scheme MTAMobile \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+    artifacts:
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/Products/Debug-iphonesimulator/*.app
