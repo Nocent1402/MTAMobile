@@ -1,0 +1,18 @@
+name: MTAMobile
+
+options:
+  bundleIdPrefix: com.nocent.mta
+
+targets:
+  MTAMobile:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: ios
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nocent.mta.mobile
+        INFOPLIST_KEY_CFBundleDisplayName: MTA Mobile
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: "1,2"
